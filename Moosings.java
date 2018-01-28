@@ -69,3 +69,11 @@ public class Moosings {
 	}
 		
 }
+//The four pillars of OOP: Abstraction, Encapsulation, Inheritance, Polymorphism
+//Abstraction refers to the ability to create representations of objects with definable and malleable 
+//attributes and actions – which in effect manages complexity.
+//Encapsulation refers to securing an objects private properties and while utilizing public properties 
+//to employ the object – ie. the ‘class’ system.
+//Inheritance refers to the ability to create ‘child’ classes built upon existing classes by inheriting
+//certain properties, behavior and data.
+//Polymorphism refers to being able to derive and utilize functions across parent/child classes.
