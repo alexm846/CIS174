@@ -19,7 +19,7 @@ public class Administer {
 
 	List<Exam> examList = new ArrayList<Exam>();
 	int examSelection = 0;
-	
+
 	public static void main(String[] args) {
 
 		Administer go = new Administer();
@@ -32,21 +32,20 @@ public class Administer {
 	public void loadExams() {
 		examList.add(new JavaExam());
 		examList.add(new MathExam());
-		
+
 	}
 
 	public void selectExam() {
 		int examNum = 1;
-		for(Exam exam : examList)
-		{
+		for (Exam exam : examList) {
 			System.out.print(examNum++ + ": ");
 			exam.describe();
 		}
-		
+
 		System.out.println("Select an exam number.");
 		Scanner scan = new Scanner(System.in);
 		examSelection = scan.nextInt() - 1;
-		
+
 	}
 
 	public List<Answer> administerExam() {
@@ -58,9 +57,9 @@ public class Administer {
 		List<Answer> answerList = getAnswers(answerFile);
 		exam.beginExam(questionList, answerList);
 		return answerList;
-		
+
 	}
-	
+
 	public List<Question> getQuestions(String questionFile) {
 		// method to read in question file, create Question objects, and put them into a
 		// list
@@ -84,11 +83,11 @@ public class Administer {
 					questionNum++;
 					// add the actual (numbered) question to Question object, then add answer
 					// options to content
-					Question question = new Question(line,"", questionNum);
+					Question question = new Question(line, "", questionNum);
 					questionList.add(question);
 				}
 				// if the first character is not a number...
-				if (Character.isDigit(line.charAt(0)) == false) { 
+				if (Character.isDigit(line.charAt(0)) == false) {
 					questionList.get(questionNum - 1)
 							.setContent(questionList.get(questionNum - 1).getContent() + "\n" + line);
 				}
@@ -101,7 +100,6 @@ public class Administer {
 		return questionList;
 	}
 
-	
 	public List<Answer> getAnswers(String answerFile) {
 		// method to read in the answer file, create Answer objects, and add them to a
 		// list
@@ -132,35 +130,35 @@ public class Administer {
 		}
 		return answerList;
 	}
-	
+
 	public void calculateScore(List<Answer> answerList) {
 		String outFile = "Score.txt";
 		Exam exam = examList.get(examSelection);
 		// method to print & write to exam results
-				try {
-					PrintWriter fWriter = new PrintWriter(outFile);
-					int numCorrect = 0;
-					int numQues = 0;
-					double grade = 0;
-					fWriter.println(exam.describe());
-					for (Answer answer : answerList) {
-						numQues++;
-						fWriter.println(answer); // write the results to file
-						System.out.println(answer);
-						// use Answer isCorrect method & count correct answers
-						if (answer.isCorrect() == true) {
-							numCorrect++;
-						}
-					}
-					grade = (double) numCorrect / (double) numQues * 100; // calculate grade
-					System.out.println("Total Grade: " + grade);
-					fWriter.println();
-					fWriter.println("Total Grade: " + grade);
-					fWriter.close();
-				} catch (IOException e) {
-					System.out.println(e.getMessage());
+		try {
+			PrintWriter fWriter = new PrintWriter(outFile);
+			int numCorrect = 0;
+			int numQues = 0;
+			double grade = 0;
+			fWriter.println(exam.describe());
+			for (Answer answer : answerList) {
+				numQues++;
+				fWriter.println(answer); // write the results to file
+				System.out.println(answer);
+				// use Answer isCorrect method & count correct answers
+				if (answer.isCorrect() == true) {
+					numCorrect++;
 				}
-		
+			}
+			grade = (double) numCorrect / (double) numQues * 100; // calculate grade
+			System.out.println("Total Grade: " + grade);
+			fWriter.println();
+			fWriter.println("Total Grade: " + grade);
+			fWriter.close();
+		} catch (IOException e) {
+			System.out.println(e.getMessage());
+		}
+
 	}
 
 }
